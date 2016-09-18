@@ -1,0 +1,44 @@
+﻿@model LearningSignalR.BackEnd.ViewModels.Messages.DetailsMessage
+@{
+    ViewBag.Title = "Details";
+}
+<h2>Details of message #@this.Model.Code</h2>
+<div>
+    <h4>DetailsMessage</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CompanyName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CompanyName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Subject)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Subject)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Body)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Body)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SentByUserName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SentByUserName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SentAt)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SentAt)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "List")
+</p>

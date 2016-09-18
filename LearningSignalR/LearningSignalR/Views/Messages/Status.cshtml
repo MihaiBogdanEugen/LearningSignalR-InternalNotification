@@ -1,0 +1,47 @@
+﻿@model LearningSignalR.BackEnd.ViewModels.Messages.StatusMessage
+@{
+    ViewBag.Title = "Status";
+}
+<h2>Status</h2>
+<div>
+    <h4>StatusMessage</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Total No Of Messages:
+        </dt>
+        <dd>
+            @Html.TextBoxFor(model => model.TotalNoOfMessages, htmlAttributes: new { disabled = true })
+        </dd>
+        <dt>
+            Total No Of Unread Messages:
+        </dt>
+        <dd>
+            @Html.TextBoxFor(model => model.TotalNoOfUnreadMessages, htmlAttributes: new { disabled = true })
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "List")
+</p>
+@section scripts {
+    <script src="~/assets/js/jquery.signalR-2.2.1.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script>
+        $(function() {
+            var jobHub = $.connection.jobHub;
+
+            var companyId = @Model.CompanyId;
+
+            jobHub.client.update = function (companyId, totalNoOfMessages, totalNoOfUnreadMessages) {
+                //alert('CompanyId: ' + companyId + ', TotalNoOfMessages: ' + totalNoOfMessages + ', TotalNoOfUnreadMessages: ' + totalNoOfUnreadMessages)
+
+                $('#TotalNoOfMessages').attr('value', totalNoOfMessages);
+                $('#TotalNoOfUnreadMessages').attr('value', totalNoOfUnreadMessages);
+            };
+            $.connection.hub.start().done(function () {
+                jobHub.server.subscribe(companyId);
+            });
+        });
+    </script>
+}

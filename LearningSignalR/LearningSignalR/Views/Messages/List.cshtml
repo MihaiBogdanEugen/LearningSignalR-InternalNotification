@@ -1,0 +1,56 @@
+﻿@model IEnumerable<LearningSignalR.BackEnd.ViewModels.Messages.ListMessage>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "New")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SentAt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SentByUserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompanyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Subject)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SentAt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SentByUserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyName)
+        </td>
+        <td>
+            @if (item.IsRead)
+            {
+                @Html.DisplayFor(modelItem => item.Subject)
+            }
+            else
+            {
+                <b>@Html.DisplayFor(modelItem => item.Subject)</b>
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { code=item.Code })
+        </td>
+    </tr>
+}
+
+</table>
